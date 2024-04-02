@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import "./App.css";
 import { useState } from "react";
+import Start from "./components/Start/Start";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -9,7 +10,7 @@ const StyledHeader = styled.header`
   justify-content: center;
 `;
 const StyledH1 = styled.h1`
-  color: rgb(36, 36, 36);
+  color: rgb(42, 42, 42);
   margin: 2rem, 2rem, 2rem, 5rem;
   text-align: center;
   align-self: center;
@@ -20,33 +21,60 @@ const StyledH1 = styled.h1`
 
   /* border: 2px solid white; */
 `;
+
+const StyledH2 = styled.h2`
+  color: rgb(42, 42, 42);
+  margin: 0.5rem;
+  text-align: center;
+  align-self: center;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+`;
+
 const StyledP = styled.p`
-  color: rgb(36, 36, 36);
-  margin: auto;
+  color: rgb(42, 42, 42);
+  margin: 0.5rem, 0.5rem, 8rem, 0.5rem;
   padding: 0.5rem;
   text-align: center;
 `;
 
-const ButtonContainer = styled.div`
+const StyledSection = styled.section`
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 1rem;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const TestSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightgrey;
+`;
+const ButtonContainer = styled.div`
+  display: grid;
+  /* position: inherit; */
+  grid-column-start: auto;
+  grid-template-columns: 2fr, 2fr, 2fr, 2fr, 2fr;
+  grid-template-rows: 2fr;
+  grid-auto-flow: row;
+  margin: 0.5rem;
   border: 2px solid white;
 `;
 
 const StyledButton = styled.button`
-  background-color: rgb(36, 36, 36);
+  background-color: rgb(42, 42, 42);
   color: black;
   font-size: 1.2rem;
   line-height: 1.2rem;
   box-shadow: none;
-  align-self: center;
-  margin: auto;
+  /* align-self: center; */
+  margin: 0.5rem;
+  width: 16rem;
 `;
 
 const StyledMessage = styled.p`
-  color: rgb(36, 36, 36);
+  color: rgb(42, 42, 42);
   font-size: 1.2rem;
   line-height: 1.2rem;
   text-align: center;
@@ -55,22 +83,31 @@ const StyledMessage = styled.p`
 `;
 
 function App() {
-  const [mode, setMode] = useState("dark");
-  const [message, setMessage] = useState("Push a button!");
+  const darkness = "D A R K N E S S";
 
+  const initialMode = {
+    mode: "start",
+    lightmodebutton: true,
+    lettherebelightbutton: false,
+  };
+  const [mode, setMode] = useState(initialMode);
+  const [message, setMessage] = useState(darkness);
+  //delayed message:"Push a button!"
   function getTotalDarkness() {
-    console.log("Darkness");
-    setMode("totaldarkness");
+    setMode({ ...mode, mode: "totaldarkness" });
     setMessage("You will get total darkness... soon...");
+    console.log(mode);
   }
 
   return (
-    <section>
+    <main>
+      {mode.mode === "start" ? <Start setMode={setMode} /> : null}
       <StyledHeader>
         <StyledH1>DARKNESS</StyledH1>
         <StyledP>A TRIBUTE TO THE GODS OF THE EVERLASTING NIGHT</StyledP>
       </StyledHeader>
-      <ButtonContainer>
+
+      <div className="button-container">
         <StyledButton
           onClick={() =>
             setMessage(
@@ -80,13 +117,27 @@ function App() {
         >
           LIGHT MODE
         </StyledButton>
+        <div>
+          {mode.lettherebelightbutton === true ? (
+            <StyledButton onClick={() => setMessage("No ...")}>
+              LET THERE BE LIGHT!
+            </StyledButton>
+          ) : null}
+        </div>
         <StyledButton onClick={() => setMessage("Kill the flame!")}>
           YOU WANT IT DARKER?
         </StyledButton>
         <StyledButton onClick={getTotalDarkness}>TOTAL DARKNESS</StyledButton>
-      </ButtonContainer>
-      <StyledMessage>{message}</StyledMessage>
-    </section>
+      </div>
+      {/* No user story color scheme? Slider for darkness until more darkness */}
+      <StyledSection>
+        <StyledMessage>{message}</StyledMessage>
+      </StyledSection>
+      <TestSection>
+        <StyledH2>testing only</StyledH2>
+        <button>reset all states</button>
+      </TestSection>
+    </main>
   );
 }
 

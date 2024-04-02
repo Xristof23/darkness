@@ -1,0 +1,8 @@
+.button-container {
+  display: flex;
+  align-self: center;
+  justify-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  /* border: 2px solid rgb(225, 9, 9); */
+}
