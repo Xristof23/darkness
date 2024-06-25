@@ -2,6 +2,7 @@ import styled from "styled-components";
 import "./App.css";
 import { useState } from "react";
 import Start from "./components/Start/Start";
+import TestPage from "./components/Start/TestPage";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -137,6 +138,7 @@ function App() {
         <StyledH2>testing only</StyledH2>
         <button>reset all states</button>
       </TestSection>
+      <TestPage />
     </main>
   );
 }

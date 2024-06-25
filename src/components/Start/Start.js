@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import TestPage from "./TestPage";
 
 const StyledIntroduction = styled.p`
   color: black;
@@ -28,15 +29,19 @@ const StyledWarning = styled.h1`
 
 export default function Start({ mode, setMode }) {
   return (
-    <IntroductionSection>
-      <StyledWarning>a warning</StyledWarning>
-      <StyledIntroduction>
-        this side is not for everyone. this side does not follow the rule book.
-        no high contrast, no clear navigation. <br></br>it is not informational
-        but inceptional. it serves no real purpose some might say. <br></br>but
-        some are wrong. its purpose is a tribute.
-      </StyledIntroduction>
-      <button onClick={() => setMode({ ...mode, mode: "dark" })}>start</button>
-    </IntroductionSection>
+    <>
+      <IntroductionSection>
+        <StyledWarning>a warning</StyledWarning>
+        <StyledIntroduction>
+          this side is not for everyone. this side does not follow the rule
+          book. no high contrast, no clear navigation. <br></br>it is not
+          informational but inceptional. it serves no real purpose some might
+          say. <br></br>but some are wrong. its purpose is a tribute.
+        </StyledIntroduction>
+        <button onClick={() => setMode({ ...mode, mode: "dark" })}>
+          start
+        </button>
+      </IntroductionSection>
+    </>
   );
 }
